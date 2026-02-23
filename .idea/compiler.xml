@@ -11,4 +11,10 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="demo" options="--enable-preview" />
+      <module name="java-srtp" options="--enable-preview" />
+    </option>
+  </component>
 </project>
