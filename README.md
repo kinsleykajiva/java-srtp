@@ -77,4 +77,6 @@ In SRTP, a single session context (`srtp_t`) can behave differently depending on
 
 - `java-srtp`: Contains the low-level FFM bindings generated for `libsrtp`.
 - `demo`: Contains the test demos and usage examples.
-- `libsrtp`: The original C library source (used for building the native binary).
+
+
+Please note  that the c file referenes are talking about files found int libsrtp folder or repository .
