@@ -1,6 +1,9 @@
-# SRTP Java Panama (FFM API) Project
+# SRTP Java Panama (FFM API) Project ![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows)
 
 This project provides high-performance Java bindings for the [libsrtp](https://github.com/cisco/libsrtp) library using Java's Foreign Function & Memory (FFM) API (Project Panama). It allows Java applications to leverage the industry-standard Secure Real-time Transport Protocol (SRTP) implementation with minimal overhead.
+
+> [!IMPORTANT]
+> This project currently only supports **Windows**. Support for Linux and macOS is planned for future releases.
 
 ## Test Demos
 
