@@ -1,13 +1,13 @@
-# SRTP Java Panama (FFM API) Project ![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows)
+# SRTP Java Panama (FFM API) Project ![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows) ![Linux](https://img.shields.io/badge/Platform-Linux-orange?logo=linux)
 
 This project provides high-performance Java bindings for the [libsrtp](https://github.com/cisco/libsrtp) library using Java's Foreign Function & Memory (FFM) API (Project Panama). It allows Java applications to leverage the industry-standard Secure Real-time Transport Protocol (SRTP) implementation with minimal overhead.
 
 > [!IMPORTANT]
-> This project currently only supports **Windows**. Support for Linux and macOS is planned for future releases.
+> This project supports **Windows** and **Linux**.
 
 ## Test Demos
 
-The `demo` module contains a suite of Java applications that are direct ports of the original C test drivers found in the `libsrtp` repository. These demos serve both as verification tests and as implementation examples for developers.
+The `demo` module contains a list or range of  of Java applications that are direct ports of the original C test drivers found in the `libsrtp` repository. These demos serve both as verification tests and as implementation examples for developers.
 
 ### Ported Test Drivers
 
@@ -41,22 +41,38 @@ These demos demonstrate the core patterns required to use the native library saf
 
 From the root project directory:
 
-```powershell
+```bash
 mvn clean install
 ```
 
 ### Execution
 
-To run a demo, you must enable preview features and provide the path to the native library. For example, to run the full SRTP demo:
+To run a demo, you must enable preview features. For example, to run the full SRTP demo:
 
+**Windows (PowerShell)**
 ```powershell
 java --enable-preview --enable-native-access=ALL-UNNAMED `
-  -Djava.library.path="path/to/libsrtp/build" `
   -classpath "demo/target/classes;java-srtp/target/classes" `
   demo.io.github.kinsleykajiva.SrtpDemo
 ```
 
-*Note: Replace `path/to/libsrtp/build` with the actual directory containing `libsrtp3.dll`.*
+**Linux**
+```bash
+java --enable-preview --enable-native-access=ALL-UNNAMED \
+  -classpath "demo/target/classes:java-srtp/target/classes" \
+  demo.io.github.kinsleykajiva.SrtpDemo
+```
+
+*The native library (`libsrtp3.dll` on Windows, `libsrtp3.so` on Linux) is bundled inside the `java-srtp` JAR and extracted automatically at runtime. No manual library path setup is required.*
+
+#### Linux Prerequisites
+
+The Linux build links against OpenSSL. Ensure `libssl3` is installed:
+
+```bash
+sudo apt install libssl3   # Debian/Ubuntu
+sudo dnf install openssl-libs  # Fedora/RHEL
+```
 
 ## Common Pitfalls and Lessons Learned
 
