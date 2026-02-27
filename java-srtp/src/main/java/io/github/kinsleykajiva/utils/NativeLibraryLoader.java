@@ -8,8 +8,17 @@ import java.nio.file.StandardCopyOption;
 import java.lang.foreign.SymbolLookup;
 
 public class NativeLibraryLoader {
-    private static final String LIB_NAME = "libsrtp3.dll";
+    private static final String LIB_NAME;
     private static boolean loaded = false;
+
+    static {
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            LIB_NAME = "libsrtp3.dll";
+        } else {
+            LIB_NAME = "libsrtp3.so";
+        }
+    }
 
     public static synchronized void load() {
         if (loaded) return;
