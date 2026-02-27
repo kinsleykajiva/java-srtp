@@ -36,6 +36,19 @@ These demos demonstrate the core patterns required to use the native library saf
 - **Java SDK**: Version 22 or later is required for the Foreign Function & Memory API.
 - **libsrtp**: The native library must be compiled as a shared object (`.dll` on Windows, `.so` on Linux/macOS).
 - **Maven**: For building the project.
+- **Java Panama (FFM)**: Built for modern Java versions.
+
+## Installation
+
+Add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>io.github.kinsleykajiva</groupId>
+  <artifactId>java-srtp</artifactId>
+  <version>0.2.0</version>
+</dependency>
+```
 
 ### Build Instructions
 

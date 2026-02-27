@@ -6,7 +6,32 @@
 
     <groupId>io.github.kinsleykajiva</groupId>
     <artifactId>java-srtp</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
+    <name>Java-SRTP</name>
+    <description>A Java binding for libsrtp (Secure Real-time Transport Protocol)</description>
+    <url>https://github.com/kinsleykajiva/java-srtp</url>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Kinsley Kajiva</name>
+            <email>kinsleykajiva@gmail.com</email>
+            <organization>kinsleykajiva</organization>
+            <organizationUrl>https://github.com/kinsleykajiva</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/kinsleykajiva/java-srtp.git</connection>
+        <developerConnection>scm:git:ssh://github.com:kinsleykajiva/java-srtp.git</developerConnection>
+        <url>https://github.com/kinsleykajiva/java-srtp/tree/main</url>
+    </scm>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
@@ -24,6 +49,62 @@
                     <compilerArgs>
                         <arg>--enable-preview</arg>
                     </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.8.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--batch</arg>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
                 </configuration>
             </plugin>
         </plugins>
