@@ -43,14 +43,17 @@ jobs:
           server-username: CENTRAL_USERNAME
           server-password: CENTRAL_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-passphrase: GPG_PASSPHRASE # This sets the ENV var name for the passphrase
+
+      - name: Verify GPG Key Import
+        run: gpg --list-secret-keys --keyid-format LONG
 
       - name: Publish to Maven Central
-        run: mvn -f java-srtp/pom.xml clean deploy -DskipTests -B -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+        run: mvn -f java-srtp/pom.xml clean deploy -DskipTests -B
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
   release:
     name: GitHub Release
