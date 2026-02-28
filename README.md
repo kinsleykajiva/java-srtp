@@ -2,6 +2,9 @@
 
 This project provides high-performance Java bindings for the [libsrtp](https://github.com/cisco/libsrtp) library using Java's Foreign Function & Memory (FFM) API (Project Panama). It allows Java applications to leverage the industry-standard Secure Real-time Transport Protocol (SRTP) implementation with minimal overhead.
 
+Please note that I did not provide high level APIs to use this library and its done on purpose to allow developers to develop or use this as they wish in their use cases and not to limit them based on my own implementation.
+You can use this to build your own libs .
+
 > [!IMPORTANT]
 > This project supports **Windows** and **Linux**.
 
@@ -11,15 +14,15 @@ The `demo` module contains a list or range of  of Java applications that are dir
 
 ### Ported Test Drivers
 
-| Java Demo | Original C Driver | Feature Tested |
+| Java Demo |  | Feature Tested |
 | :--- | :--- | :--- |
-| **KernelDemo** | `kernel_driver.c` | Crypto kernel initialization, cipher/auth allocation, and library shutdown. |
-| **AuthDemo** | `auth_driver.c` | HMAC-SHA1 authentication against NIST test vectors. |
-| **ReplayDemo** | `replay_driver.c` | Basic anti-replay database (`srtp_rdb_t`) and replay window logic. |
-| **CipherDemo** | `cipher_driver.c` | AES-ICM (Integer Counter Mode) encryption and decryption cycles. |
-| **RdbxDemo** | `rdbx_driver.c` | Extended replay database (`srtp_rdbx_t`) with Rollover Counter (ROC) management. |
-| **ROC_DriverDemo** | `roc_driver.c` | Deep-level verification of sequence number index guessing and rollover handling. |
-| **SrtpDemo** | `srtp_driver.c` | Full SRTP lifecycle: policy setup, session creation, packet protection, and unprotection. |
+| **KernelDemo** |  | Crypto kernel initialization, cipher/auth allocation, and library shutdown. |
+| **AuthDemo** |  | HMAC-SHA1 authentication against NIST test vectors. |
+| **ReplayDemo** |  | Basic anti-replay database (`srtp_rdb_t`) and replay window logic. |
+| **CipherDemo** |  | AES-ICM (Integer Counter Mode) encryption and decryption cycles. |
+| **RdbxDemo** |  | Extended replay database (`srtp_rdbx_t`) with Rollover Counter (ROC) management. |
+| **ROC_DriverDemo** |  | Deep-level verification of sequence number index guessing and rollover handling. |
+| **SrtpDemo** |  | Full SRTP lifecycle: policy setup, session creation, packet protection, and unprotection. |
 
 ### Technical Details for Developers
 
@@ -34,7 +37,7 @@ These demos demonstrate the core patterns required to use the native library saf
 ### Prerequisites
 
 - **Java SDK**: Version 22 or later is required for the Foreign Function & Memory API.
-- **libsrtp**: The native library must be compiled as a shared object (`.dll` on Windows, `.so` on Linux/macOS).
+- **libsrtp**: The native library must be compiled as a shared object (`.dll` on Windows, `.so` on Linux).
 - **Maven**: For building the project.
 - **Java Panama (FFM)**: Built for modern Java versions.
 
@@ -110,5 +113,4 @@ In SRTP, a single session context (`srtp_t`) can behave differently depending on
 - `java-srtp`: Contains the low-level FFM bindings generated for `libsrtp`.
 - `demo`: Contains the test demos and usage examples.
 
-
-Please note  that the c file referenes are talking about files found int libsrtp folder or repository .
+Contributions are very much welcome . Please feel free to have this be better , I would also love to learn from you as well  .
