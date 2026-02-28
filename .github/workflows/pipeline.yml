@@ -43,17 +43,17 @@ jobs:
           server-id: central
           server-username: CENTRAL_USERNAME
           server-password: CENTRAL_PASSWORD
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: GPG_PASSPHRASE
 
       - name: Import GPG Key
+        env:
+          GPG_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          echo "$GPG_KEY" | gpg --batch --import
           gpg --list-secret-keys --keyid-format LONG
 
       - name: Publish to Maven Central
         working-directory: java-srtp
-        run: mvn clean deploy -DskipTests -B -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+        run: mvn clean deploy -DskipTests -B -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} -Dgpg.keyname=C396F5369161517219B04239145F01D359D48C86
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
