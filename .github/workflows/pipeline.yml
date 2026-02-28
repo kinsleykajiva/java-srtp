@@ -56,11 +56,15 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
+      - name: List GPG Keys (Debug)
+        run: gpg --list-secret-keys --keyid-format LONG
+
       - name: Publish to Maven Central
         working-directory: java-srtp
         run: |
           mvn clean deploy -DskipTests -B \
-            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
+            -Dgpg.keyname=C396F5369161517219B04239145F01D359D48C86
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
