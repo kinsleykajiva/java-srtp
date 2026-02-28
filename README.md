@@ -41,6 +41,7 @@ These demos demonstrate the core patterns required to use the native library saf
 - **Maven**: For building the project.
 - **Java Panama (FFM)**: Built for modern Java versions.
 
+
 ## Installation
 
 Add the following dependency to your `pom.xml`:
