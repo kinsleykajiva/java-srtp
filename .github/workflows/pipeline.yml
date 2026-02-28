@@ -32,46 +32,9 @@ jobs:
         working-directory: java-srtp
         run: mvn clean install -DskipTests
 
-  deploy:
-    name: Publish to Maven Central
-    needs: build
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v'))
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up JDK 25
-        uses: actions/setup-java@v4
-        with:
-          java-version: "25"
-          distribution: "temurin"
-          cache: maven
-          server-id: central
-          server-username: CENTRAL_USERNAME
-          server-password: CENTRAL_PASSWORD
-
-      - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
-      - name: List GPG Keys (Debug)
-        run: gpg --list-secret-keys --keyid-format LONG
-
-      - name: Publish to Maven Central
-        working-directory: java-srtp
-        run: |
-          mvn clean deploy -DskipTests -B \
-            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
-            -Dgpg.keyname=C396F5369161517219B04239145F01D359D48C86
-        env:
-          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
-          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-
   release:
     name: GitHub Release
-    needs: deploy
+    needs: build
     if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     steps:
