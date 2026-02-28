@@ -1,4 +1,7 @@
-# SRTP Java Panama (FFM API) Project ![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows) ![Linux](https://img.shields.io/badge/Platform-Linux-orange?logo=linux)
+# SRTP Java Panama (FFM API) Project ![GitHub Release](https://img.shields.io/github/v/release/kinsleykajiva/java-srtp?logo=github) ![Maven Central](https://img.shields.io/maven-central/v/io.github.kinsleykajiva/java-srtp?logo=apachemaven) ![Windows](https://img.shields.io/badge/Platform-Windows-blue?logo=windows) ![Linux](https://img.shields.io/badge/Platform-Linux-orange?logo=linux) ![License](https://img.shields.io/github/license/kinsleykajiva/java-srtp)
+
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.kinsleykajiva/java-srtp.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.kinsleykajiva/java-srtp)
+[![GitHub Releases](https://img.shields.io/github/release/kinsleykajiva/java-srtp.svg?label=GitHub%20Releases)](https://github.com/kinsleykajiva/java-srtp/releases)
 
 This project provides high-performance Java bindings for the [libsrtp](https://github.com/cisco/libsrtp) library using Java's Foreign Function & Memory (FFM) API (Project Panama). It allows Java applications to leverage the industry-standard Secure Real-time Transport Protocol (SRTP) implementation with minimal overhead.
 
