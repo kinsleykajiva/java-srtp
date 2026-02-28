@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [main, master]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build and Test
@@ -48,26 +51,19 @@ jobs:
           server-password: CENTRAL_PASSWORD
 
       - name: Import GPG Key
-        env:
-          GPG_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: |
-          echo "$GPG_KEY" | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
-          echo -e "5\ny\n" | gpg --batch --command-fd 0 \
-            --edit-key C396F5369161517219B04239145F01D359D48C86 trust quit || true
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Publish to Maven Central
         working-directory: java-srtp
         run: |
           mvn clean deploy -DskipTests -B \
-            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
-            -Dgpg.keyname=C396F5369161517219B04239145F01D359D48C86 \
-            -Dgpg.gpgArguments="--pinentry-mode loopback"
+            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
         env:
           CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
           CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
   release:
     name: GitHub Release
@@ -92,6 +88,5 @@ jobs:
           generate_release_notes: true
           draft: false
           prerelease: false
-          overwrite_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
